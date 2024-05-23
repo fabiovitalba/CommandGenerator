@@ -1,7 +1,6 @@
 package org.sattelite.command;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Map;
@@ -11,10 +10,10 @@ import java.util.zip.ZipOutputStream;
 public class CompressedXMLSerializer {
 	
 	public void generateFile(String filename, PropertiesGetter propGetter){
-		byte[] bytes = createXMLFile(propGetter.getPropertiesList());
+		byte[] bytes = formatInformation(propGetter.getPropertiesList());
 		
 	    try {
-	    	bytes = zip(bytes);
+	    	bytes = postProcess(bytes);
 			FileOutputStream fileout = new FileOutputStream(filename);
 			fileout.write(bytes);
 			fileout.close();
@@ -23,7 +22,7 @@ public class CompressedXMLSerializer {
 		}
 	}
 
-	protected byte[] zip(byte[] bytes)
+	protected byte[] postProcess(byte[] bytes)
 			throws IOException {
 		ByteArrayOutputStream byteOut = new ByteArrayOutputStream();
 		ZipOutputStream out = new ZipOutputStream(byteOut);
@@ -34,7 +33,7 @@ public class CompressedXMLSerializer {
 		return byteOut.toByteArray();
 	}
 
-	protected byte[] createXMLFile(Map<String, Object> props) {
+	protected byte[] formatInformation(Map<String, Object> props) {
 		StringBuilder propFileBuilder = new StringBuilder();
 		propFileBuilder.append("<properties>");
 		for(String prop : props.keySet()){

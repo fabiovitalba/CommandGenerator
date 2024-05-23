@@ -13,10 +13,10 @@ public class CryptoPropertiesSerializer {
 	}
 
 	public void generateFile(String filename, PropertiesGetter propGetter){
-		byte[] bytes = createPropertiesFormat(propGetter.getPropertiesList());
+		byte[] bytes = formatInformation(propGetter.getPropertiesList());
 		
 		try {
-			bytes = encript(bytes);	
+			bytes = postProcess(bytes);
 			FileOutputStream fileout = new FileOutputStream(filename);
 			fileout.write(bytes);
 			fileout.close();
@@ -26,7 +26,7 @@ public class CryptoPropertiesSerializer {
 		
 	}
 
-	private byte[] encript(byte[] bytes) {
+	private byte[] postProcess(byte[] bytes) {
 		byte[] newBytes = new byte[bytes.length];
 		for(int i=0;i<bytes.length;i++){
 			newBytes[i]= (byte) ((bytes[i]+delay) % Byte.MAX_VALUE);
@@ -34,7 +34,7 @@ public class CryptoPropertiesSerializer {
 		return newBytes;
 	}
 
-	private byte[] createPropertiesFormat(Map<String, Object> props) {
+	private byte[] formatInformation(Map<String, Object> props) {
 		StringBuilder propFileBuilder = new StringBuilder();
 		for(String prop : props.keySet()){
 			propFileBuilder.append(prop + "="+props.get(prop)+"\n");
