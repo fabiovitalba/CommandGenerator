@@ -1,5 +1,8 @@
 package org.sattelite.command;
 
+import org.sattelite.postprocessor.Compressor;
+import org.sattelite.postprocessor.Encriptor;
+
 public class Main {
 	
 	public static void main(String[] args){
@@ -9,10 +12,10 @@ public class Main {
 		// Compressed + Properties
 		// ... but we want to avoid duplicate code!
 
-		CompressedXMLSerializer cxs = new CompressedXMLSerializer();
+		XMLSerializer cxs = new XMLSerializer(new Compressor());
 		cxs.generateFile("command.zip", command);
 		
-		CryptoPropertiesSerializer sps = new CryptoPropertiesSerializer(5);
+		PropertiesSerializer sps = new PropertiesSerializer(new Encriptor(5));
 		sps.generateFile("command.txt", command);
 		
 	}
