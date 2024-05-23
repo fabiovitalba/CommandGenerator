@@ -1,9 +1,7 @@
 package org.sattelite.command;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class TurnCommand implements PropertiesGetter{
+@CommandType("TURN")
+public class TurnCommand {
 	
 	private String turnSpeed;
 	private int anglePlaneX;
@@ -31,17 +29,6 @@ public class TurnCommand implements PropertiesGetter{
 
 	public int getAnglePlaneZ() {
 		return anglePlaneZ;
-	}
-
-	@Override
-	public Map<String, Object> getPropertiesList() {
-		Map<String,Object> props = new HashMap<String, Object>();
-		props.put("CommandType", "TURN");
-		props.put("TurnSpeed", turnSpeed);
-		props.put("AnglePlaneX", anglePlaneX);
-		props.put("AnglePlaneY", anglePlaneY);
-		props.put("AnglePlaneZ", anglePlaneZ);
-		return props;
 	}
 
 }

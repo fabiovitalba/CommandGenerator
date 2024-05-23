@@ -8,7 +8,8 @@ import org.sattelite.postprocessor.PostProcessor;
 public class Main {
 	
 	public static void main(String[] args){
-		TurnCommand command = new TurnCommand("SLOW", 180, 60, 45); 
+		//TurnCommand command = new TurnCommand("SLOW", 180, 60, 45);
+		ForwardCommand command = new ForwardCommand("FULL",1000, "MySuperSecretCode");
 
 		// Given Example
 		/*
@@ -32,9 +33,18 @@ public class Main {
 
 		// Part #3
 		// What if we want to use multiple post processors?
+		/*
 		PostProcessor combinedPostProcessor = new CompositePostProcessor(new Encriptor((byte)5), new Compressor());
 		PropertiesSerializer sps = new PropertiesSerializer(combinedPostProcessor);
 		sps.generateFile("new_command.zip", command);
+		*/
+
+
+		// Part #4
+		// What if we want to introduce a new Command?
+		// But we do not want to implement the PropertiesGetter class.
+		PropertiesSerializer sps = new PropertiesSerializer(new Compressor());
+		sps.generateFile("reflectioncommand.zip", command);
 	}
 
 }

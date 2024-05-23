@@ -30,9 +30,12 @@ bin/
 ### Mac OS ###
 .DS_Store
 
+### Application Specific ###
 command.txt
 new_command.txt
 newcommand.txt
 command.zip
 new_command.zip
 newcommand.zip
+reflectioncommand.txt
+reflectioncommand.zip
